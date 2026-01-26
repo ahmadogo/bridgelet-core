@@ -23,7 +23,7 @@ fn construct_sweep_message(
 
     // Construct the message by concatenating:
     // - destination (serialized as bytes)
-    // - nonce (as u64, 8 bytes)
+    // - nonce (as u64, 8 bytes)  
     // - contract_id (serialized as bytes)
     let mut message = soroban_sdk::Bytes::new(env);
 
@@ -64,7 +64,7 @@ fn construct_sweep_message(
 /// Ok(()) if signature is valid, Error otherwise
 pub fn verify_sweep_auth(
     env: &Env,
-    account: &Address,
+    _account: &Address,
     destination: &Address,
     signature: &BytesN<64>,
 ) -> Result<(), Error> {
@@ -81,7 +81,6 @@ pub fn verify_sweep_auth(
     // Verify the Ed25519 signature
     env.crypto()
         .ed25519_verify(&authorized_signer, &message.into(), signature);
-        
     Ok(())
 }
 
